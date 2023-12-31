@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/main.css">
+  <title>Document</title>
+</head>
+<body>
+  <nav class="nav-main">
+    <div class="nav-bar" id="clock"></div>
+  </nav>
+
+
+  <section>
+    <h1 class="title" id="title-change" contenteditable="true">
+      Alekseis dashboard!
+    </h1>
+  </section>
+
+  <main>
+    <div class="cards card1">
+      <h2>Lägg till länkar!</h2>
+      <form id="linkForm" class="link-form">
+        <!-- <label for="linkTitle">Rubrik för länken:</label> -->
+        <input type="text" id="linkTitle" required placeholder="Ange rubrik för länken" title="Rubrik för länken" />
+        
+        <!-- <label for="linkURL">Länk-URL:</label> -->
+        <input type="url" id="linkURL" required placeholder="Ange URL för länken" title="Länk-URL" />
+        
+        <button type="submit">Lägg till länk</button>
+      </form>
+      
+      <ul id="linkList">
+        
+      </ul>
+    </div>
+    <div class="cards card2">
+        <h2>Väder i närheten</h2>
+        <div id="weatherInfo">
+          
+        </div>
+    </div>
+    <div class="cards card3">
+      <h2>Senaste nyheterna i Sverige</h2>
+  <ul id="newsList" class="news-list">
+   
+  </ul>
+    </div>
+    <div class="cards card4">
+      <h2>Snabba anteckningar</h2>
+      <textarea id="noteArea" rows="10" title="snabba anteckningar för dig">
+
+      </textarea>
+    </div>
+    
+  </main>
+
+  <footer>
+    <button class="random-img" onclick="getRandomImage()">
+      Slumpa en ny backgrund!
+    </button>
+  </footer>
+  <script src="../script/main.js"></script>
+</body>
+</html>
