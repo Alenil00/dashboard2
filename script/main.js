@@ -53,6 +53,11 @@ window.addEventListener('DOMContentLoaded', function() {
 const linkForm = document.getElementById('linkForm');
 const linkList = document.getElementById('linkList');
 
+// Ladda befintliga länkar från local storage när sidan laddas
+document.addEventListener('DOMContentLoaded', function () {
+  loadLinksFromLocalStorage();
+});
+
 linkForm.addEventListener('submit', function(event) {
   event.preventDefault();
 
@@ -63,6 +68,7 @@ linkForm.addEventListener('submit', function(event) {
   // Lägg till länken till listan om rubrik och URL är ifyllda
   if (linkTitle && linkURL) {
     addLinkToList(linkTitle, linkURL);
+    saveLinkToLocalStorage(linkTitle, linkURL); // Spara länken till local storage
     linkForm.reset(); // Återställ formuläret efter att länken har lagts till
   }
 });
@@ -79,13 +85,37 @@ function addLinkToList(title, url) {
   deleteButton.innerHTML = '&times;'; // Lägg till ett kryss (X)
   deleteButton.classList.add('delete-button');
   deleteButton.addEventListener('click', function() {
-    listItem.remove(); // Ta bort länken från listan
+    listItem.remove();
+    removeLinkFromLocalStorage(title, url); // Ta bort länken från local storage
   });
 
   listItem.appendChild(link);
   listItem.appendChild(deleteButton);
   linkList.appendChild(listItem);
 }
+
+// Funktion för att spara länken till local storage
+function saveLinkToLocalStorage(title, url) {
+  let links = JSON.parse(localStorage.getItem('links')) || [];
+  links.push({ title, url });
+  localStorage.setItem('links', JSON.stringify(links));
+}
+
+// Funktion för att ladda länkarna från local storage
+function loadLinksFromLocalStorage() {
+  let links = JSON.parse(localStorage.getItem('links')) || [];
+  links.forEach(link => {
+    addLinkToList(link.title, link.url);
+  });
+}
+
+// Funktion för att ta bort länken från local storage
+function removeLinkFromLocalStorage(title, url) {
+  let links = JSON.parse(localStorage.getItem('links')) || [];
+  links = links.filter(link => !(link.title === title && link.url === url));
+  localStorage.setItem('links', JSON.stringify(links));
+}
+
 
 // min JS för card2 
 
